@@ -1,13 +1,15 @@
-{% snapshot snapshot_name %}
-    {{
-        config(
-            target_schema='dev_schema',
-            target_database='dev_db',
-            unique_key='tid',
-            strategy='check',
-            check_cols=['status']
-        )
-    }}
+{% snapshot status_check %}
 
-    select * from {{ source('s1', 't_ticket') }}
- {% endsnapshot %}
+{{
+    config(
+      target_schema='dev_schema',
+      target_database='dEV_DB',
+      unique_key='tid',
+      strategy='check',
+      check_cols=['status']
+    )
+}}
+
+select * from {{ source('s1', 't_ticket') }}
+
+{% endsnapshot %}
